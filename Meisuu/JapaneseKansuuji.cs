@@ -10,8 +10,8 @@ namespace Meisuu
     {
         private const string SuujiChars = "一二三四五六七八九";
         private const string SmallKuraiChars = "十百千";
-        private static readonly ulong[] Pow10Values;
-        private static readonly ulong[] Pow10000Values;
+        private static readonly decimal[] Pow10Values;
+        private static readonly decimal[] Pow10000Values;
         private const string DaijiSuujiChars = "壱弐参";
         private const string DaijiSmallKuraiChars = "拾";
         private const string LargeKuraiChars = "万億兆京垓𥝱";
@@ -19,23 +19,23 @@ namespace Meisuu
 
         static JapaneseKansuuji()
         {
-            Pow10Values = new ulong[3];
-            ulong v = 1;
-            for (ulong i = 0; i < (ulong)Pow10Values.Length; i++)
+            Pow10Values = new decimal[3];
+            decimal v = 1;
+            for (int i = 0; i < Pow10Values.Length; i++)
             {
                 v *= 10;
                 Pow10Values[i] = v;
             }
-            Pow10000Values = new ulong[16];
+            Pow10000Values = new decimal[4];
             v = 1;
-            for (ulong i = 0; i < (ulong)Pow10000Values.Length; i++)
+            for (int i = 0; i < Pow10000Values.Length; i++)
             {
                 v *= 10000;
                 Pow10000Values[i] = v;
             }
         }
 
-        public static bool TryParse(string s, out ulong result)
+        public static bool TryParse(string s, out decimal result)
         {
             int endIndex;
             if (!TryParse(s, 0, out endIndex, out result)) return false;
@@ -43,7 +43,7 @@ namespace Meisuu
             return true;
         }
 
-        public static bool TryParse(string s, ulong style, out int endIndex, out ulong result)
+        public static bool TryParse(string s, decimal style, out int endIndex, out decimal result)
         {
             endIndex = 0;
             result = 0;
@@ -52,9 +52,9 @@ namespace Meisuu
                 endIndex = 1;
                 return true;
             }
-            ulong underKuraiValue = 0;
-            ulong smallKuraiValue = 0;
-            ulong largeKuraiValue = 0;
+            decimal underKuraiValue = 0;
+            decimal smallKuraiValue = 0;
+            decimal largeKuraiValue = 0;
             int i;
             for (i = 0; i < s.Length; i++)
             {
@@ -63,7 +63,7 @@ namespace Meisuu
                 if (index != -1)
                 {
                     if (underKuraiValue != 0) return false; // We have already had a suuji char.
-                    underKuraiValue = (ulong) index + 1;
+                    underKuraiValue = (decimal) index + 1;
                     continue;
                 }
                 index = SmallKuraiChars.IndexOf(ch);
