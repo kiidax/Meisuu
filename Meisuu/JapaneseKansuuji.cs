@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* Meisuu (命数) - a Japanese Kansuuji (漢数字) parser
+ * Copyright (C) 2015 Katsuya Iida. All rights reserved.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
