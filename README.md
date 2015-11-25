@@ -17,4 +17,4 @@ decimal result = Meisuu.JapaneseKansuuji.Parse("二百万三千四百五十六",
 
 ## Contributions
 
-Anyone is welcome to contribute.
+Offer of contibutions is always welcome.
